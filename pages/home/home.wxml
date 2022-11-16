@@ -1,0 +1,74 @@
+<!--pages/home/home.wxml-->
+<!-- 放置轮播图，轮播图是关于停车场的分布 -->
+<view class="container" style="width: 750rpx; height: 790rpx; display: flex; box-sizing: border-box">
+  <view class="swiper-container">
+    <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange" indicator-dots indicator-color="white" indicator-active-color="blue">
+      <block wx:for="{{banners}}" wx:key="id" >
+        <swiper-item bindtap="preview">
+          <image data-id="{{item.id}}" src="{{item.picUrl}}" class="slide-image" width="750rpx" height="562.5rpx" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 四个图标：点击车位跳转车位添加、车位编辑（跳转之前判断当前用户的身份）
+        车牌：添加、删除、编辑车牌号
+        我的位置：跳转位置页面
+        服务咨询：模拟拨打物业电话
+   -->
+  <view class='tools-container'>
+    <view class='tools-container-box'>
+      <view class='tools-item' bindtap='goToYuyue'>
+        <view class='tools-item-image-container'>
+          <image src='../../static/yuyue.png' class='tools-item-image'></image>
+        </view>
+        <view class='tools-item-text-container'>
+          <text class='tools-item-text'>预约</text>
+        </view>
+      </view>
+      <view class='tools-item' bindtap='goToCarplace'>
+        <view class='tools-item-image-container'>
+          <image src='../../static/car_place.png' class='tools-item-image'></image>
+        </view>
+        <view class='tools-item-text-container'>
+          <text class='tools-item-text'>停车位置</text>
+        </view>
+      </view>
+      <view class='tools-item' bindtap='openLocation'>
+        <view class='tools-item-image-container'>
+          <image src='../../static/ava_location.png' class='tools-item-image'></image>
+        </view>
+        <view class='tools-item-text-container'>
+          <text class='tools-item-text' >我的位置</text>
+        </view>
+      </view>
+      <view class='tools-item'  bindtap='salContact'>
+        <view class='tools-item-image-container'>
+          <image src='../../static/bao.png' class='tools-item-image'></image>
+        </view>
+        <view class='tools-item-text-container'>
+          <text class='tools-item-text'>服务咨询</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 资讯视窗，点击进入详细的收费标准页面 -->
+  <view  style="width: 324rpx; height: 186rpx; display: block; box-sizing: border-box">
+      <view style="width: 100rpx; height: 120rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"  >
+        <image src="../../static/options/zixun.jpg" class="img-1"  style="position: relative; left: -198rpx; top: -30rpx"></image>
+      </view>
+      <!-- <button size="mini" plain="true">默认按钮</button> -->
+      <button bindtap="navToMes" size="mini" plain="true" class="but-1" style="color: tan; position: relative; left: -22rpx; top: -98rpx">小区</button>
+      <button bindtap="navToMes" size="mini" plain="true" class="but-2" style="color: steelblue; position: relative; left: -148rpx; top: -15rpx">停车场</button>
+      <text bindtap="navToMes" style="position: relative; left: 160rpx; top: -174rpx">
+      停车场收费规则简要：
+      非本小区车主进入需
+      要注册小程序并且上
+      传车牌，点击知详情
+      </text>
+    </view>
+    <!-- 停车场简要方位 -->
+    <view>
+      <image src="{{map_sim}}" style="width: 736rpx; height: 471rpx; display: inline-block; box-sizing: border-box"></image>
+    </view>
+</view>
+
