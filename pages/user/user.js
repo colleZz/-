@@ -1,62 +1,41 @@
 // pages/user/user.js
+import {getStorageUserInfo} from '../../utils/storge'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
+    hasUserInfo:false
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad:function(options) {
-  // 判断用户是否授权登录
-  wx.getSetting({
-    success: function (res) {
-      // 判断是否授权
-      if (res.authSetting['scope.userInfo']) {
-         //获取用户信息
-        wx.getUserInfo({
-          success: function (res) {
-            //用户已经授权过，添加用户信息
-            var that = this
-            wx.setStorageSync('nickName', res.userInfo.nickName)
-            wx.setStorageSync('avatarUrl', res.userInfo.avatarUrl)
-            console.log(res.userInfo)
-          }
-        });
-      }else{
-        wx.showToast({
-           title: '请授权登录！',
-           icon: 'none',
-           duration: 1500,
-           success: function () {
-        //定时器，未授权1.5秒后跳转授权页面
-           setTimeout(function () {
-           wx.reLaunch({
-           url: '../home/home.wxml',
-              })
-            }, 1500);
-           }
-          })
+  onLoad() {
+  },
+  getUserProfile(e) {
+    // 推荐使用 wx.getUserProfile 获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
       }
-    }
-  })
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+        // 获取本地存储中的用户信息
   },
 
   /**

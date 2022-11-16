@@ -22,7 +22,7 @@
           <image src='../../static/yuyue.png' class='tools-item-image'></image>
         </view>
         <view class='tools-item-text-container'>
-          <text class='tools-item-text'>预约</text>
+          <text class='tools-item-text'>预约车位</text>
         </view>
       </view>
       <view class='tools-item' bindtap='goToCarplace'>
@@ -30,7 +30,7 @@
           <image src='../../static/car_place.png' class='tools-item-image'></image>
         </view>
         <view class='tools-item-text-container'>
-          <text class='tools-item-text'>停车位置</text>
+          <text class='tools-item-text'>车位信息</text>
         </view>
       </view>
       <view class='tools-item' bindtap='openLocation'>
@@ -38,7 +38,7 @@
           <image src='../../static/ava_location.png' class='tools-item-image'></image>
         </view>
         <view class='tools-item-text-container'>
-          <text class='tools-item-text' >我的位置</text>
+          <text class='tools-item-text' >目的导航</text>
         </view>
       </view>
       <view class='tools-item'  bindtap='salContact'>

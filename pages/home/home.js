@@ -26,8 +26,10 @@ Page({
   onLoad: function (options) {
     var that = this
     wx.setNavigationBarTitle({
-      title: "智慧停车场"
+      title: "x小区车辆管理"
     })
+    const demo=wx.getStorageSync("demo")
+    console.log(demo)
     // wx.request({
     //  调用后台API，将真正可以修改的轮播图数组赋值
     //   url: 'https://api.it120.cc/' + "wow_sale" + '/banner/list',

@@ -1,1 +1,51 @@
-/* pages/user/user.wxss */
+/* pages/user/index.wxss */
+page {
+  background-color: #efefef;
+}
+
+.address,
+.contact_warp,
+.recommend {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.order .order_warp navigator .iconfont {
+  color: var(--themeColor);
+}
+.phone{
+  background-color: #fff;
+  margin-top: 20rpx;
+  height:120rpx;
+}
+.phone_center{
+  background-color: #fff;
+  height:0rpx;
+}
+.user_bg .user_big_img {
+  width: 750rpx; 
+  height: 480rpx; 
+  display: inline-block;
+   box-sizing: border-box;
+  filter: blur(7rpx);
+  transform: scale(1.1);
+}
+.user_bg .user_info {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.user_bg .user_info image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+.user_bg .user_info .user_nickname {
+  text-align: center;
+  margin-top: 30rpx;
+}
+
+
+
+
+

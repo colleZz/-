@@ -3,14 +3,16 @@
     "pages/home/home",
     "pages/user/user",
     "pages/message/message",
+    
     "pages/plate/plate",
     "pages/carport/carport",
     "pages/yuyue/yuyue"
-
+    
   ],
   "subPackages": [
     
   ],
+
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#2b4b6b",
@@ -38,4 +40,5 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
+
 }

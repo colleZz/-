@@ -1,2 +1,46 @@
-<!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<view wx:if="{{!hasUserInfo}}">
+  <button bindtap="getUserProfile">微信登录</button>
+</view>
+<!-- 我的页面 -->
+<!-- 用户头像 -->
+<view wx:if="{{hasUserInfo}}"  >
+  <view class="user_bg">
+    <!-- 大背景图片 -->
+    <image class="user_big_img" src="{{userInfo.avatarUrl}}" style=""></image>
+    <!-- 小头像和昵称 -->
+    <view class="user_info">
+        <image mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
+        <view class="user_nickname">{{userInfo.nickName}}</view>
+    </view>
+       <!-- 绑定电话号码-->
+       <view >
+        <navigator class="phone">
+          <view>-添加、更改、删除-</view>
+          <view class="phone_center">个人电话号码</view> 
+        </navigator>
+      </view>
+      <!-- 绑定车牌-->
+      <view >
+        <navigator class="phone">
+          <view>-添加、更改、删除-</view>
+          <view class="phone_center" >车牌信息</view> 
+        </navigator>
+      </view>
+             <!-- 查看订单-->
+      <view >
+        <navigator class="phone">
+          <view>：）</view>
+            <view class="phone_center">查看订单</view> 
+        </navigator>
+      </view>
+             <!--余额-->
+      <view >
+        <navigator class="phone">
+            <view>￥ ￥</view>
+            <view class="phone_center">余额</view> 
+        </navigator>
+      </view>
+
+  </view>
+</view>
+
