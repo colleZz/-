@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
-    userInfo: "123"
+    phone:"15932850152",
+    identify:1
   }
 })

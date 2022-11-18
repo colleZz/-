@@ -1,23 +1,21 @@
 {
-  "pages":[
+  "pages": [
     "pages/home/home",
     "pages/user/user",
     "pages/message/message",
-    
     "pages/plate/plate",
     "pages/carport/carport",
-    "pages/yuyue/yuyue"
-    
+    "pages/yuyue/yuyue",
+    "pages/user_mes/user_mes",
+    "pages/order_mes/order_mes",
+    "pages/money/money"
   ],
-  "subPackages": [
-    
-  ],
-
-  "window":{
-    "backgroundTextStyle":"dark",
+  "subPackages": [],
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2b4b6b",
     "navigationBarTitleText": "智慧停车场",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -40,5 +38,4 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
-
 }

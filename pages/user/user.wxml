@@ -1,46 +1,60 @@
 <view wx:if="{{!hasUserInfo}}">
-  <button bindtap="getUserProfile">微信登录</button>
+    <view wx:if="{{canIUse}}" >
+        <view class='header'>
+            <image src='../../static/wx_login.png'></image>
+        </view>
+
+        <view class='content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view>
+
+        <button class='bottom' type='primary' lang="zh_CN" bindtap="getUserProfile">
+            授权登录
+        </button>
+    </view>
+    <view wx:else>请升级微信版本</view>
 </view>
 <!-- 我的页面 -->
 <!-- 用户头像 -->
 <view wx:if="{{hasUserInfo}}"  >
   <view class="user_bg">
     <!-- 大背景图片 -->
-    <image class="user_big_img" src="{{userInfo.avatarUrl}}" style=""></image>
+    <image class="user_big_img" src="{{bguser}}" ></image>
     <!-- 小头像和昵称 -->
     <view class="user_info">
         <image mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
         <view class="user_nickname">{{userInfo.nickName}}</view>
     </view>
-       <!-- 绑定电话号码-->
+       <!-- 个人信息处理-->
        <view >
-        <navigator class="phone">
+        <navigator url="../user_mes/user_mes?userinfo='{{userInfo}}'" class="phone">
           <view>-添加、更改、删除-</view>
-          <view class="phone_center">个人电话号码</view> 
+          <view class="phone_center">个人信息</view> 
         </navigator>
       </view>
-      <!-- 绑定车牌-->
+      <!-- 车位信息处理（使用时间段）  navigator跳转时，需要将当前登录用户的电话号码传入 -->
+      <view wx:if="{{isowner}}">
+        <navigator class="phone" url="../plate/plate?phone='15932850152'">
+          <view>' ' ' ' </view>
+          <view class="phone_center" >车位信息</view> 
+        </navigator>
+      </view>
+             <!-- 查看订单  navigator跳转时，需要携带当前用户的电话号码 -->
       <view >
-        <navigator class="phone">
-          <view>-添加、更改、删除-</view>
-          <view class="phone_center" >车牌信息</view> 
+        <navigator class="phone" url="../../pages/order_mes/order_mes">
+          <view>-></view>
+            <view class="phone_center">停车日志</view> 
         </navigator>
       </view>
-             <!-- 查看订单-->
+             <!--余额   同样也是查看当前用户的余额-->
       <view >
-        <navigator class="phone">
-          <view>：）</view>
-            <view class="phone_center">查看订单</view> 
-        </navigator>
+        <view bindtap="toShowModal" class="phone" url="../money/money">
+            <view>￥</view>
+            <view class="phone_center">余额
+            <text wx:if="{{showModal}}">{{money}}</text>
+            </view> 
+        </view>
       </view>
-             <!--余额-->
-      <view >
-        <navigator class="phone">
-            <view>￥ ￥</view>
-            <view class="phone_center">余额</view> 
-        </navigator>
-      </view>
-
   </view>
 </view>
-

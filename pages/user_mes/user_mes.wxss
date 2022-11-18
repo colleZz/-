@@ -1,0 +1,83 @@
+/* pages/user_mes/user_mes.wxss */
+.view-contain-ti {
+  display: flex;
+  height: 40px;
+  margin: 20px;
+  border: 3rpx solid #faca82;
+  border-radius: 10rpx;
+}
+.heck-contain-ti{
+  display: flex;
+  height: 40px;
+  margin: 20px;
+}
+.text-ti {
+  position: absolute;
+  font-size: 12px;
+  background: white;
+  margin: -10px 0 0 10px;
+  padding: 0 5px;
+  color: rgb(144, 147, 167);
+}
+.button{
+  align-items: center;
+  width: 2rpx;
+  height: 71rpx;
+  line-height: 7rpx;
+  font-size: 28rpx;
+  background: #deebbb;
+  float: left;
+  margin-left: 1rpx;
+  margin-top: 1rpx;
+  color: #FFFFFF;
+}
+.plate,.phone {
+  margin:  auto 10px;
+}
+/* pages/user/index.wxss */
+page {
+  background-color: #efefef;
+}
+
+.address,
+.contact_warp,
+.recommend {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.order .order_warp navigator .iconfont {
+  color: var(--themeColor);
+}
+
+.phone_center{
+  background-color: #fff;
+  height:0rpx;
+}
+.user_bg .user_big_img {
+  width: 750rpx; 
+  height: 480rpx; 
+  display: inline-block;
+   box-sizing: border-box;
+  filter: blur(5rpx);
+  transform: scale(1.1);
+}
+.user_bg .user_info {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.user_bg .user_info image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+.user_bg .user_info .user_nickname {
+  text-align: center;
+  margin-top: 30rpx;
+}
+
+
+
+
+

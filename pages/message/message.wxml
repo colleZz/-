@@ -1,2 +1,30 @@
 <!--pages/message/message.wxml-->
-<text>停车收费标准</text>
+<view>
+  
+  <view >admin</view>
+  <view class="time">
+    {{time}}
+  </view>
+  <view>
+    <text> 本小区停车细则： </text>
+  </view>
+  <view>
+    <view class="mess" display: block style="white-space:pre-wrap">
+    一、使用前准备
+      微信一键登录或者注册账号，未绑定手机号和车牌号的用户需要提前绑定信息，方可使用本系统。实现互惠互利。
+    </view>
+    <view class="mess" display: block style="white-space:pre-wrap">
+    二、一些需要大家一齐遵守的规则
+    一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则
+    一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则一些需要大家一齐遵守的规则
+    </view>
+    <view class="mess" display: block style="white-space:pre-wrap">
+    三、租用车位的费用
+      微信一键登录或者注册账号，未绑定手机号和车牌号的用户需要提前绑定信息，方可使用本系统。实现互
+    </view>
+    <view class="mess" display: block style="white-space:pre-wrap">
+    四、突发情况的解决办法
+      微信一键登录或者注册账号，未绑定手机号和车牌号的用户需要提前绑定信息，方可使用本系统。实现互
+    </view>
+  </view>
+</view>

@@ -1,20 +1,30 @@
-// pages/carport/carport.js
+// pages/money/money.js
 Page({
+
+ 
   /**
    * 页面的初始数据
    */
   data: {
-    map_sim:"../../static/map.png",
     phone:"",
     userInfo:"",
-    test:"",
-    number:12
+    showModal:false,
+  },
+  toShowModal(e) {
+    this.setData({
+      showModal: true
+    })
   },
 
+  hideModal(){
+    this.setData({
+      showModal: false
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  
+ 
   onLoad(options) {
     var app = getApp()
     
@@ -40,24 +50,25 @@ Page({
         }
       })
     }else{
-      console.log("onLoad")
-      this.setData({
-        test:"onLoadonLoadonLoadonLoad"
-      })
+      console.log("此处开始向后台发送请求，获取数据")
     }
+      
 
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
+
   },
 
   /**

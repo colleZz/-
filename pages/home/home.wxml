@@ -66,9 +66,6 @@
       传车牌，点击知详情
       </text>
     </view>
-    <!-- 停车场简要方位 -->
-    <view>
-      <image src="{{map_sim}}" style="width: 736rpx; height: 471rpx; display: inline-block; box-sizing: border-box"></image>
-    </view>
+
 </view>
 

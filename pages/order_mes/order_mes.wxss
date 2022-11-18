@@ -1,3 +1,4 @@
+/* pages/order_mes/order_mes.wxss */
 /* pages/yuyue/yuyue.wxss */
 /*切换栏*/
 .swiper-tab {
@@ -125,10 +126,4 @@
 .productCount>view {
   float: right;
   margin-right: 30rpx;
-}
-
-.yuyue-add {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }

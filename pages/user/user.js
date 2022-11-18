@@ -1,15 +1,41 @@
 // pages/user/user.js
-import {getStorageUserInfo} from '../../utils/storge'
+import {setStorageUserInfo} from '../../utils/storge'
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    hasUserInfo:false
+    //判断小程序的API，回调，参数，组件等是否在当前版本可用。
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    money:100,
+    phone:"",
+    isowner:false,
+    bguser:"../../static/bguser.png",
+    userInfo:"",
+    hasUserInfo:false,
+    showModal:false
+  },
+  //点击显示模态框并且获取当前用户的余额
+  toShowModal(e) {
+    if (!this.data.showModal) {
+      this.setData({
+        showModal: true
+      })
+    }else{
+      this.setData({
+        showModal: false
+      })
+    }
+
+  },
+
+  hideModal(){
+    this.setData({
+      showModal: false
+    });
   },
   onLoad() {
+    
   },
   getUserProfile(e) {
     // 推荐使用 wx.getUserProfile 获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
@@ -19,8 +45,9 @@ Page({
       success: (res) => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
+          hasUserInfo: true,
         })
+        wx.setStorageSync('userInfo', res.userInfo)
       }
     })
   },

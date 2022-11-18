@@ -1,0 +1,17 @@
+var common = {
+  orderStatused: function (_num) {
+    switch (_num) {
+      case 0: return "已完成"; break;
+      case 1: return "正在进行"; break;
+      case 2: return "已取消"; break;
+      case 200: return "交易成功"; break;
+      case 300: return "正在进行"; break;
+      case 400: return "交易失败"; break;
+      default: return ""; break;
+    }
+  }
+}
+ 
+module.exports = {
+  orderText: common.orderStatused,
+}

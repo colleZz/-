@@ -1,6 +1,6 @@
 <!-- 切换栏 -->
 <wxs module="Filter" src="../../utils/filter/filter.wxs"></wxs>
-<view class="swiper-tab">
+<view class="swiper-tab" >
   <block wx:for="{{swipertab}}" wx:key="sptab">
     <view class="swiper-tab-list {{currtab == item.index ? 'on' : ''}}" data-current="{{item.index}}" bindtap="tabSwitch">{{item.name}}</view>
   </block>
@@ -10,21 +10,27 @@
   <!-- 完成 -->
   <swiper-item>
     <scroll-view class="hot-box" scroll-y="true">
-      <view  class="orderDetails" wx:for="{{yuyue}}" wx:key="id" >
-        <view wx:if="{{item.status==0}}">
+      <view  class="orderDetails" wx:for="{{order_mes}}" wx:key="id" >
+        <view  wx:if="{{item.status==200}}">
           <view class="orderListTitle">
-          <text class="id">预约编号：{{item.id}}</text>
+          <text class="id">订单编号:{{item.id}}</text>
           <text class="orderStatus">   
-            <text class="orderStatus">{{Filter.orderText(0)}}</text>
+            <text class="orderStatus">{{Filter.orderText(200)}}</text>
           </text>
         </view>
         <view class="orderListDetails">
           <view class="productImg">
             <text>{{item.plate}}</text>
+            <view>车位:{{item.parklocation}}</view>
           </view>
           <view class="productInfo">
-            <view class="productTitle">预定时间: {{item.starttime}}</view>
-            <text class="productPrice"> 完成时间：{{item.overtime}}</text>
+            <view class="productTitle">进场时间: {{item.intime}}</view>
+              <text class="productPrice"> 出场时间：{{item.outtime}}</text>
+              <view class="productCount">
+                  <view>
+                    <text>合计：￥{{item.parkfee}}</text>
+              </view>
+            </view>
           </view>
         </view>
         </view>
@@ -34,10 +40,10 @@
   <!-- 正在进行 -->
   <swiper-item>
     <scroll-view class="hot-box" scroll-y="true">
-      <view  class="orderDetails" wx:for="{{yuyue}}" wx:key="id" >
-        <view wx:if="{{item.status==1}}">
+      <view  class="orderDetails" wx:for="{{order_mes}}" wx:key="id" >
+        <view wx:if="{{item.status==300}}">
           <view class="orderListTitle">
-          <text class="id">预约编号：{{item.id}}</text>
+          <text class="id">订单编号：{{item.id}}</text>
           <text class="orderStatus">   
             <text class="orderStatus">{{Filter.orderText(300)}}</text>
           </text>
@@ -45,10 +51,16 @@
         <view class="orderListDetails">
           <view class="productImg">
             <text>{{item.plate}}</text>
+            <view>车位:{{item.parklocation}}</view>
           </view>
           <view class="productInfo">
-            <view class="productTitle">预定时间: {{item.starttime}}</view>
+            <view class="productTitle">进入时间: {{item.intime}}</view>
             <text class="productPrice"> 完成时间：{{item.overtime}}</text>
+            <view class="productCount">
+                  <view>
+                    <text>合计：￥{{item.parkfee}}</text>
+              </view>
+            </view>
           </view>
         </view>
         </view>
@@ -58,21 +70,27 @@
   <!-- 取消 -->
   <swiper-item>
     <scroll-view class="hot-box" scroll-y="true">
-      <view  class="orderDetails" wx:for="{{yuyue}}" wx:key="id" >
-        <view wx:if="{{item.status==2}}">
+      <view  class="orderDetails" wx:for="{{order_mes}}" wx:key="id" >
+        <view wx:if="{{item.status==400}}">
           <view class="orderListTitle">
           <text class="id">预约编号：{{item.id}}</text>
           <text class="orderStatus">   
-            <text class="orderStatus">{{Filter.orderText(400)}}</text>
+            <text class="orderStatus">{{Filter.orderText(2)}}</text>
           </text>
         </view>
         <view class="orderListDetails">
           <view class="productImg">
-            <text>{{item.plate}}</text>
+            <text >{{item.plate}}</text>
+            <view>车位:{{item.parklocation}}</view>
           </view>
           <view class="productInfo">
-            <view class="productTitle">预定时间: {{item.starttime}}</view>
-            <text class="productPrice"> 完成时间：{{item.overtime}}</text>
+            <view class="productTitle">进场时间: {{item.intime}}</view>
+            <text class="productPrice"> 出场时间：{{item.outtime}}</text>
+            <view class="productCount">
+                  <view>
+                    <text>合计：￥{{item.parkfee}}</text>
+              </view>
+            </view>
           </view>
         </view>
         </view>
@@ -80,6 +98,3 @@
     </scroll-view>
   </swiper-item>
 </swiper>
-<view class="yuyue-add">
-  <button type="primary" bindtap="addyuyue">立即预约</button>
-</view>

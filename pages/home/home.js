@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    phone:"",
+    identify:"",
     //暂时设置为定值，在后期需要在onload（页面加载时）调用后端api进行获取路径，管理员可以修改
-    map_sim:"../../static/map.png",
+    
     autoplay: true,
     interval: 3000,
     duration: 1000,
@@ -23,10 +25,14 @@ Page({
    */
   
    
-  onLoad: function (options) {
-    var that = this
+  onLoad (options) {
+    var app=getApp()
+    this.setData({
+      phone:app.globalData.phone,
+      identify:app.globalData.identify
+    })
     wx.setNavigationBarTitle({
-      title: "x小区车辆管理"
+      title: "小区车辆管理"
     })
     const demo=wx.getStorageSync("demo")
     console.log(demo)
