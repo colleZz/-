@@ -73,7 +73,7 @@
       <view  class="orderDetails" wx:for="{{order_mes}}" wx:key="id" >
         <view wx:if="{{item.status==400}}">
           <view class="orderListTitle">
-          <text class="id">预约编号：{{item.id}}</text>
+          <text class="id">订单编号：{{item.id}}</text>
           <text class="orderStatus">   
             <text class="orderStatus">{{Filter.orderText(2)}}</text>
           </text>

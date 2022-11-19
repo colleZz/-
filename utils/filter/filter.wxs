@@ -9,7 +9,8 @@ var common = {
       case 400: return "交易失败"; break;
       default: return ""; break;
     }
-  }
+  },
+  
 }
  
 module.exports = {

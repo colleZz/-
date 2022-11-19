@@ -20,27 +20,18 @@
           <view class="view-contain-ti">
           <text class="text-ti">车牌号</text>
           <text class="phone" data-id="{{item.id}}" >{{item.plate}} </text>
-          <button type="default" bindtap="deletepalte"data-palate="{{item.plate}}" style="position: relative; left: 188rpx; top: -2rpx; width: 168rpx; height: 76rpx; display: block; box-sizing: border-box">删</button>
-          <button type="default" bindtap="changepalte"  data-palate="{{item.plate}}"  style="position: relative; left: 62rpx; top: -2rpx; width: 168rpx; height: 76rpx; display: block; box-sizing: border-box">改</button>
-        </view>
+          </view>
         </block>
+        <view class="view-contain-ti">
+          <text class="text-ti">车位号</text>
+          <text class="phone">{{parkLocation}}</text>
+          </view>
+          <view class="view-contain-ti">
+          <text class="text-ti">余额</text>
+          <text class="phone">{{money}}</text>
+          </view>
+          <button bindtap="goToCZhi">余额充值</button>
      </view>
-    <button bindtap="addmes"  type="default" class="">编辑个人信息</button>
+    <!-- <button bindtap="addmes"  type="default" class="">编辑个人信息</button> -->
   </view>
-  <view wx:if="{{addmes}}">
-  <view class="view-contain-ti">
-    <text class="text-ti">电话号码</text>
-    <input class="phone"  value="{{phone}}" bindinput="phone" />
-    <button class='button' bindtap='doGetCode' disabled='{{disabled}}'>获取</button>
-</view>
-<view class="view-contain-ti">
-    <text class="text-ti">验证码</text>
-    <input class="plate" value="{{VerificationCode}}" bindinput="plate" />
-</view>
-<view class="view-contain-ti">
-    <text class="text-ti">车牌号</text>
-    <input class="plate" value="{{plate}}" bindinput="plate" />
-</view>
-  <button bindtap="submit" type="default">修改/添加</button>
-  <button bindtap="checkmes" type="default">查看个人信息</button>
-</view>
+

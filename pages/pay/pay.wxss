@@ -1,0 +1,2 @@
+/* pages/pay/pay.wxss */
+@import "../../components/pay/pay.wxss"

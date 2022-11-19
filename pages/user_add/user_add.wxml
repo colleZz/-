@@ -1,0 +1,15 @@
+<!--pages/user_add/user_add.wxml-->
+<view class="view-contain-ti">
+    <text class="text-ti">电话号码</text>
+    <input class="phone"  maxlength="11" value="{{phone}}" bindinput="phone" />
+    <button class='button' bindtap='doGetCode' disabled='{{disabled}}'>获取验证码</button>
+</view>
+<view class="view-contain-ti">
+    <text class="text-ti">验证码</text>
+    <input class="plate" maxlength="6" value="{{VerificationCode}}" bindinput="VerificationCode" />
+</view>
+<view class="view-contain-ti">
+    <text class="text-ti">车牌号</text>
+    <input class="plate" maxlength="7" value="{{plate}}" bindinput="plate" />
+</view>
+  <button bindtap="submit" type="default">绑定</button>

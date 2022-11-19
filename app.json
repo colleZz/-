@@ -8,13 +8,19 @@
     "pages/yuyue/yuyue",
     "pages/user_mes/user_mes",
     "pages/order_mes/order_mes",
-    "pages/money/money"
+    "pages/chongzhi/chongzhi",
+    "pages/user_add/user_add",
+    "pages/pay/pay",
+    "pages/user_change/user_change"
   ],
   "subPackages": [],
+  "usingComponents": {
+    "paySix":"/components/pay/pay"
+  },
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#2b4b6b",
-    "navigationBarTitleText": "智慧停车场",
+    "navigationBarBackgroundColor": "#8aaaf3",
+    "navigationBarTitleText": "小区车辆管理",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

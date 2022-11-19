@@ -8,6 +8,7 @@ Page({
     phone:"",
     userInfo:"",
     test:"",
+    //剩余车位数量,页面加载时向后端发送请求获取空闲车位的信息
     number:12
   },
 
@@ -17,13 +18,10 @@ Page({
   
   onLoad(options) {
     var app = getApp()
-    
     this.setData({
       phone:app.globalData.phone,
       userInfo:wx.getStorageSync('userInfo'),
     })
-    
-    
     if(this.data.phone==""||this.data.phone.length<11) {
       wx.showModal({
         title: '请前往个人信息页面绑定手机号以及各类信息',

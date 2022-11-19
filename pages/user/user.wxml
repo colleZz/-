@@ -27,34 +27,42 @@
         <view class="user_nickname">{{userInfo.nickName}}</view>
     </view>
        <!-- 个人信息处理-->
-       <view >
-        <navigator url="../user_mes/user_mes?userinfo='{{userInfo}}'" class="phone">
-          <view>-添加、更改、删除-</view>
-          <view class="phone_center">个人信息</view> 
+       <view class="address">
+        <navigator class="address" url="../user_mes/user_mes?userinfo='{{userInfo}}'" >
+          <view  style="width: 750rpx; height: 72rpx; display: block; box-sizing: border-box">查看个人信息
+            <text class="iconfont iconarrow-left" style="position: relative; left: 440rpx; top: 2rpx"></text>
+          </view> 
         </navigator>
-      </view>
-      <!-- 车位信息处理（使用时间段）  navigator跳转时，需要将当前登录用户的电话号码传入 -->
-      <view wx:if="{{isowner}}">
-        <navigator class="phone" url="../plate/plate?phone='15932850152'">
-          <view>' ' ' ' </view>
-          <view class="phone_center" >车位信息</view> 
+        <view class="line"></view>
+        <navigator class="address" url="../user_add/user_add" >
+          <view  style="width: 750rpx; height: 70rpx; display: block; box-sizing: border-box">绑定个人信息
+            <text class="iconfont iconarrow-left" style="position: relative; left: 440rpx; top: 2rpx"></text>
+          </view> 
         </navigator>
-      </view>
-             <!-- 查看订单  navigator跳转时，需要携带当前用户的电话号码 -->
-      <view >
-        <navigator class="phone" url="../../pages/order_mes/order_mes">
-          <view>-></view>
-            <view class="phone_center">停车日志</view> 
+        <view class="line"></view>
+        <navigator class="address" url="../user_change/user_change" >
+          <view  style="width: 750rpx; height: 70rpx; display: block; box-sizing: border-box">修改个人信息
+            <text class="iconfont iconarrow-left" style="position: relative; left: 440rpx; top: 2rpx"></text>
+          </view> 
         </navigator>
-      </view>
-             <!--余额   同样也是查看当前用户的余额-->
-      <view >
-        <view bindtap="toShowModal" class="phone" url="../money/money">
-            <view>￥</view>
-            <view class="phone_center">余额
-            <text wx:if="{{showModal}}">{{money}}</text>
-            </view> 
-        </view>
+          <view wx:if="{{isowner}}">
+            <view class="line"></view>
+              <navigator  url="../plate/plate?phone='15932850152'">
+                 <view >车位信息
+                  <text class="iconfont iconarrow-left" style="position: relative; left: 450rpx; top: 2rpx"></text>
+                 </view> 
+                </navigator>
+                 </view>
+         <view class="line"></view>
+        <navigator class="address" url="../../pages/order_mes/order_mes">
+          <!-- <view>-></view> -->
+          <!-- 查看订单  navigator跳转时，需要携带当前用户的电话号码 -->
+          <view  style="width: 750rpx; height: 64rpx; display: block; box-sizing: border-box">停车日志
+            <text class="iconfont iconarrow-left" style="position: relative; left: 504rpx; top: 2rpx"></text>
+          </view> 
+        </navigator> 
+          <!-- 分割线 -->
+        <view class="line"></view>
       </view>
   </view>
 </view>
