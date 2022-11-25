@@ -5,33 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    money:"11111.90",
-    parkLocation:"A5",
-    addmes:false,
-    checkmes:true,
+    money:"",
+    parkLocation:[],
     text: '获取验证码', //按钮文字
     currentTime: 61, //倒计时
     disabled: false, //按钮是否禁用
     VerificationCode:"",
     userInfo:{},
     phone:"",
-    plates:[
-      {
-        "id":"1",
-        "plate":"赣J4n987"
-      },
-      {
-        "id":"2",
-        "plate":"赣J4n111"
-      }
-  ],
+    plates:[],
     bguser:"../../static/bguser.png",
     state:1,
   },
   goToCZhi(){
     wx.navigateTo({
       url: '../chongzhi/chongzhi',
-      
     })
   },
   changepalte(e){
@@ -63,11 +51,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    var app=getApp()
-    this.setData({
-      phone:app.globalData.phone,
-      userInfo:wx.getStorageSync('userInfo'),
-    })
+
   },
 
   /**
@@ -81,7 +65,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    var app=getApp()
+    var host =app.globalData.host
+    var that =this
+    wx.request({
+      url: host+"/user/getUserVo",
+      method:'GET',
+      data:{
+        phone: app.globalData.phone
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success:function(res){
+        //为页面需要的值进行赋值
+        console.log(res)
+        that.setData({
+          phone:app.globalData.phone,
+          money: res.data.data.userVo.userMoney,
+          userInfo:wx.getStorageSync('userInfo'),
+          plates:res.data.data.userVo.plates,
+          parkLocation: res.data.data.userVo.parkingSpace
+        })
+      }
+    })
   },
 
   /**

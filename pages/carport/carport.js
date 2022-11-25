@@ -4,7 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    map_sim:"../../static/map.png",
+    mapUrl:"../../static/map.png",
     phone:"",
     userInfo:"",
     test:"",
@@ -17,33 +17,21 @@ Page({
    */
   
   onLoad(options) {
-    var app = getApp()
-    this.setData({
-      phone:app.globalData.phone,
-      userInfo:wx.getStorageSync('userInfo'),
-    })
-    if(this.data.phone==""||this.data.phone.length<11) {
-      wx.showModal({
-        title: '请前往个人信息页面绑定手机号以及各类信息',
-        icon:"none",
-        duration:2000,
-        mask:true,
-        success(data){
-          setTimeout(function(){
-            //延时跳转
-            wx.switchTab({
-              url: '../user/user',
-            })
-          })
-        }
-      })
-    }else{
-      console.log("onLoad")
-      this.setData({
-        test:"onLoadonLoadonLoadonLoad"
-      })
-    }
-
+    //向后端发送请求，获取图片数据和剩余车位数量
+    // var app = getApp()
+    // var host=app.globalData.host
+    // wx.request({
+    //   url: host+"/admin/getCarPortUrl",
+    //   method:"GET",
+    //   header: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   success(res){
+    //     this.setData({
+    //       mapUrl:res.data.data.mapUrl
+    //     })
+    //   }
+    // })
   },
 
   /**
@@ -56,6 +44,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    //发送请求获取实时车位信息
   },
 
   /**

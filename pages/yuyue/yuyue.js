@@ -10,40 +10,40 @@ Page({
         id:"202209230825231",
         phone:"15932850152",
         plate:"赣J4N987",
-        starttime:"2022-09-28 20:15:28",
-        overtime:"2022-09-28 20:30:28",
+        startTime:"2022-09-28 20:15:28",
+        overTime:"2022-09-28 20:30:28",
         status:"0"
       },
       {
         id:"2022012312330825231",
         phone:"15932850152",
         plate:"赣J4N987",
-        starttime:"2022-09-28 20:15:28",
-        overtime:"2022-09-28 20:30:28",
+        startTime:"2022-09-27 20:15:28",
+        overTime:"2022-09-27 20:30:28",
         status:"0"
       },
       {
         id:"202201231233082522222",
         phone:"15932850152",
         plate:"赣J4N987",
-        starttime:"2022-09-28 20:15:28",
-        overtime:"2022-09-28 20:30:28",
+        startTime:"2022-09-28 20:15:28",
+        overTime:"2022-09-28 20:30:28",
         status:"2"
       },
       {
         id:"2022092308251233",
         phone:"15932850152",
         plate:"赣J4N987",
-        starttime:"2022-09-30 20:15:28",
-        overtime:"2022-09-30 20:30:28",
+        startTime:"2022-09-30 20:15:28",
+        overTime:"2022-09-30 20:30:28",
         status:"1"
       },
       {
         id:"20220923082131",
         phone:"15932850152",
         plate:"赣J4N987",
-        starttime:"2022-09-31 20:15:28",
-        overtime:"2022-09-31 20:30:28",
+        starTtime:"2022-09-31 20:15:28",
+        overTime:"2022-09-31 20:30:28",
         status:"2"
       },
     ],
@@ -176,8 +176,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    // 获取当前用户的预约信息
+    var app = getApp()
+    var host=app.globalData.host
+    wx.request({
+      url: host+"/subscribe/getInformation",
+      method:"GET",
+      header: {
+        "Content-Type": "application/json"
+      },
+      success:function(res){
+        //判断code，为200则信息赋值
+      }
+    })
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

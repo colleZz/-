@@ -21,8 +21,9 @@ Page({
   },
 //发送验证码
 doGetCode: function (e) {
-  var phone = e.target.dataset.phone;
-  if(!this.checkPhone(phone)){
+  var app=getApp()
+  var host =app.globalData.host
+  if(!this.checkPhone(this.data.phone)&&this.changePhone(this.data.newphone)){
     return
   }
   var that = this;
@@ -30,19 +31,77 @@ doGetCode: function (e) {
     disabled: true, //只要点击了按钮就让按钮禁用 （避免正常情况下多次触发定时器事件）
     color: '#ccc',
   })
- 
+ var phone=this.data.newphone
+ console.log(phone)
   var currentTime = that.data.currentTime //把手机号跟倒计时值变例成js值
   var warn = null; //warn为当手机号为空或格式不正确时提示用户的文字，默认为空
   // 发送请求，携带手机号码给后端，后端成功之后回传数据，再进行操作
+  wx.request({
+    url: host+"/user/sendValidateCode",
+    data: {
+     phone: phone,
+    },
+    method:"GET",
+    header: {
+      "Content-Type": "application/json"
+    },
+    success:function(res){
+      wx.showToast({
+        title: '短信验证码已发送',
+        icon: 'none',
+        duration: 2000
+      });
+      console.log(res)
+      // 获取验证码失败
+      if(res.data.code==201){
+        wx.showToast({
+          title: '获取失败，请重试',
+          duration: 1000,
+          icon:"none"
+        })
+        that.setData({
+          disabled: false, //重启点击
+          color: '#80a1a3',
+        })
+      }
+    }
+  })
   return true
 },
  //提交修改
  changePlate(){
+  var app=getApp()
+  var host =app.globalData.host
   if(this.checkPhone(this.data.phone)){
       //校验通过后再对新旧车牌号的格式进行验证
       if(this.checkPhone(this.data.plate)&&this.checkPhone(this.data.newplate)){
         //全部成功之后则向后端发送修改请求
-        console.log("修改成功")
+        wx.request({
+          url: host+"/user/updatePlate",
+          method: "PUT",
+          header: {
+            "Content-Type": "application/json"
+          },
+          data:{
+            phone: this.data.phone,
+            validateCode: this.data.VerificationCode,
+            newPlate:this.data.newPlate,
+            oldPlate: this.data.oldPlate
+          },
+          success:function(res){
+            //请求失败的提示信息
+            if(res.data.code==201){
+              wx.showToast({
+                title: '修改失败请重试',
+                icon:"none",
+                duration: 1000
+              })
+            }
+            wx.switchTab({
+              url: '../user/user',
+            })
+          }
+        })
         //修改成功回到查看个人信息页面
       }
   }else{
@@ -52,7 +111,33 @@ doGetCode: function (e) {
  //提交修改
  changePhone(){
   if(this.checkPhone(this.data.phone)&&this.checkPhone(this.data.newphone)){
-    //校验通过之后校验车牌号
+    var app=getApp()
+    var host =app.globalData.host
+    wx.request({
+      url:host+"/user/updatePhone" ,
+      method:"PUT",
+      data:{
+        oldPhone : this.data.phone,
+        newPhone: this.data.newphone,
+        validateCode: this.data.VerificationCode
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success:function(res){
+        //判断后端回传的值，如果为200，则需要将小程序中的全局变量修改为新修改的手机号，如果不是则展示提示框
+        if(res.data.code==201){
+          wx.showToast({
+            title: '修改失败请重试',
+            icon:"none",
+            duration: 1000
+          })
+        }
+        wx.switchTab({
+          url: '../user/user',
+        })
+      }
+    })
   }else{
     console.log("changePhone")
   }

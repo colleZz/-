@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    CZmoney:0,
+    userMoney:10.0,
+    CZmoney:0.0,
     //在onshow方法中获取当前用户的余额
     selfMoney:0,
     activeIndex: 0, //默认选中第一个
@@ -27,11 +28,12 @@ Page({
   chongzhi(){
     // 首先获取充值的金额，之后弹出支付页面，确认支付密码之后则更新金额
     this.setData({
-      CZmoney:this.data.numArray[this.data.activeIndex]=='m'?this.data.selfMoney:this.data.numArray[this.data.activeIndex]
+      CZmoney:this.data.numArray[this.data.activeIndex]=='m'?this.data.selfMoney:this.data.numArray[this.data.activeIndex],
     })
+    this.data.CZmoney+=this.data.userMoney
     console.log(this.data.CZmoney)
     wx.navigateTo({
-      url: '../pay/pay',
+      url: '../pay/pay?CZmoney='+this.data.CZmoney,
     })
   },
   /**
@@ -52,7 +54,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    var app=getApp()
+    var host = app.globalData.host
+    var that=this
+    wx.request({
+      url:host+"/user/getUserMoney" ,
+      data:{
+        phone:app.globalData.phone
+      },
+      method:"GET",
+      header: {
+        "Content-Type": "application/json"
+      },
+      success(res){
+        that.setData({
+          userMoney: res.data.data.money
+        })
+      }
+    })
   },
 
   /**

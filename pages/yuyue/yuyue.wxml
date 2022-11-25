@@ -71,8 +71,8 @@
             <text>{{item.plate}}</text>
           </view>
           <view class="productInfo">
-            <view class="productTitle">预定时间: {{item.starttime}}</view>
-            <text class="productPrice"> 完成时间：{{item.overtime}}</text>
+            <view class="productTitle">预定时间: {{item.startTime}}</view>
+            <text class="productPrice"> 完成时间：{{item.overTime}}</text>
           </view>
         </view>
         </view>

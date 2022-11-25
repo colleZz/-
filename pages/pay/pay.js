@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    CZmoney:0.0,
     // 输入框参数设置
     inputData: {
       input_value: "",//输入框的初始内容
@@ -22,19 +23,46 @@ Page({
 
     // 当组件输入数字6位数时的自定义函数
   valueSix() {
-    console.log("1");
-    // 模态交互效果
-    wx.showToast({
-      title: '支付成功',
-      icon: 'success',
-      duration: 2000
+    var app=getApp()
+    var host =app.globalData.host
+    //像后端发送请求，更新余额
+    wx.request({
+      url:host+ '/user/moneyRecharge',
+      method:"PUT",
+      header: {
+        "Content-Type": "application/json"
+      },
+      data:{
+        phone: app.globalData.phone,
+        money: this.data.CZmoney
+      },
+      success(res){
+        if(res.data.code==201){
+          // 模态交互效果
+          wx.showToast({
+            title: '充值失败请重试',
+            icon:"error",
+            duration: 2000
+          })
+        }
+        // 模态交互效果
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
     })
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.setData({
+      CZmoney:options.CZmoney
+    })
+    console.log(this.data.CZmoney)
   },
 
   /**

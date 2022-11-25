@@ -1,5 +1,5 @@
 <!--pages/carport/carport.wxml-->
     <!-- 停车场简要方位 -->
     <text>停车场简要方位：</text>
-      <image src="{{map_sim}}"  style="width: 744rpx; height: 572rpx; display: inline-block; box-sizing: border-box"></image>
+      <image src="{{mapUrl}}"  style="width: 744rpx; height: 572rpx; display: inline-block; box-sizing: border-box"></image>
     <text>此时剩余数量：{{number}}</text>

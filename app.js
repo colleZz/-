@@ -14,7 +14,7 @@ App({
     })
   },
   globalData: {
-    phone:"15932850152",
-    identify:1
+    phone:"",
+    host:"https://3e89c495.r3.cpolar.top"
   }
 })

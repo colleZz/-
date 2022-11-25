@@ -7,8 +7,7 @@ Page({
   data: {
     phone:"",
     identify:"",
-    //暂时设置为定值，在后期需要在onload（页面加载时）调用后端api进行获取路径，管理员可以修改
-    
+    //暂时设置为定值，在后期需要在onshow（页面加载时）调用后端api进行获取路径，管理员可以修改
     autoplay: true,
     interval: 3000,
     duration: 1000,
@@ -27,6 +26,7 @@ Page({
    
   onLoad (options) {
     var app=getApp()
+    var host =app.globalData.host
     this.setData({
       phone:app.globalData.phone,
       identify:app.globalData.identify
@@ -37,13 +37,10 @@ Page({
     const demo=wx.getStorageSync("demo")
     console.log(demo)
     // wx.request({
-    //  调用后台API，将真正可以修改的轮播图数组赋值
-    //   url: 'https://api.it120.cc/' + "wow_sale" + '/banner/list',
-    //   data: {
-    //     key: 'mallName'
-    //   },
+    // //  调用后台API，将真正可以修改的轮播图数组赋值
+    //   url: host+"/admin/getBanners",
     //   success: function (res) {
-    //     if (res.data.code == 404) {
+    //     if (res.data.code == 201) {
     //       wx.showModal({
     //         title: '提示',
     //         content: '请在后台添加 banner 轮播图片',
@@ -51,7 +48,7 @@ Page({
     //       })
     //     } else {
     //       that.setData({
-    //         banners: res.data.data
+    //         banners: res.data.data.banners
     //       });
     //     }
     //   }

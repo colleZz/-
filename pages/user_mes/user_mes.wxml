@@ -10,7 +10,7 @@
         <view class="user_nickname">{{userInfo.nickName}}</view>
     </view>
   </view>
-  <view wx:if="{{checkmes}}" class="check-contain-ti">
+ 
     <view>
         <view class="view-contain-ti">
           <text class="text-ti">电话号码</text>
@@ -22,16 +22,18 @@
           <text class="phone" data-id="{{item.id}}" >{{item.plate}} </text>
           </view>
         </block>
-        <view class="view-contain-ti">
-          <text class="text-ti">车位号</text>
-          <text class="phone">{{parkLocation}}</text>
+        <block  wx:for="{{parkLocation}}" wx:key="id" >
+          <view class="view-contain-ti">
+            <text class="text-ti">车位号</text>
+            <text class="phone">{{item.parkingSpace}}</text>
           </view>
+        </block>
           <view class="view-contain-ti">
           <text class="text-ti">余额</text>
           <text class="phone">{{money}}</text>
           </view>
           <button bindtap="goToCZhi">余额充值</button>
-     </view>
+     
     <!-- <button bindtap="addmes"  type="default" class="">编辑个人信息</button> -->
   </view>
 

@@ -1,7 +1,7 @@
 <view class="bgView flexStandard">
   <view class="titleBox">
     <view class="titleView"><text class="title">钱包余额</text></view>
-    <view><text class="num">123.10</text></view>
+    <view><text class="num">{{userMoney}}</text></view>
   </view>
 </view>
  

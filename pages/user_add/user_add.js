@@ -5,117 +5,115 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user:{},
+    currentTime:"",
     plate:"",
     VerificationCode:"",
     phone:""
   },
   //发送验证码
-  doGetCode: function () {
-    if(!this.checkPhone()){
-      return
-    }
-    var that = this;
-    that.setData({
-      disabled: true, //只要点击了按钮就让按钮禁用 （避免正常情况下多次触发定时器事件）
-      color: '#ccc',
-    })
-    var phone = that.data.phone;
-    var currentTime = that.data.currentTime //把手机号跟倒计时值变例成js值
-    var warn = null; //warn为当手机号为空或格式不正确时提示用户的文字，默认为空
-    wx.request({
-      url: '', //后端判断是否已被注册， 已被注册返回1 ，未被注册返回0
-      method: "GET",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        that.setData({
-          state: res.data
+  doGetCode: function (e) {
+  var app=getApp()
+  var host =app.globalData.host
+  if(!this.checkPhone(this.data.phone)&&this.changePhone(this.data.newphone)){
+    return
+  }
+  var that = this;
+  that.setData({
+    disabled: true, //只要点击了按钮就让按钮禁用 （避免正常情况下多次触发定时器事件）
+    color: '#ccc',
+  })
+ var phone=this.data.newphone
+ console.log(phone)
+  var currentTime = that.data.currentTime //把手机号跟倒计时值变例成js值
+  var warn = null; //warn为当手机号为空或格式不正确时提示用户的文字，默认为空
+  // 发送请求，携带手机号码给后端，后端成功之后回传数据，再进行操作
+  wx.request({
+    url: host+"/user/sendValidateCode",
+    data: {
+     phone: this.data.phone,
+    },
+    method:"GET",
+    header: {
+      "Content-Type": "application/json"
+    },
+    success:function(res){
+      wx.showToast({
+        title: '短信验证码已发送',
+        icon: 'none',
+        duration: 2000
+      });
+      console.log(res)
+      // 获取验证码失败
+      if(res.data.code==201){
+        wx.showToast({
+          title: '获取失败，请重试',
+          duration: 1000,
+          icon:"none"
         })
-        if (phone == '') {
-          warn = "号码不能为空";
-        } else if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
-          warn = "手机号格式不正确";
-        } //手机号已被注册提示信息
-        else if (that.data.state == 1) {  //判断是否被注册
-          warn = "手机号已被注册";
-        }
-        else {
-          wx.request({
-            url: '', //填写发送验证码接口
-            method: "POST",
-            data: {
-              phone: that.data.phone
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded'
-            },
-            success: function (res) {
-              console.log(res.data)
-              that.setData({
-                VerificationCode: res.data.verifycode
-              })
-              //当手机号正确的时候提示用户短信验证码已经发送
-              wx.showToast({
-                title: '短信验证码已发送',
-                icon: 'none',
-                duration: 2000
-              });
-              //设置一分钟的倒计时
-              var interval = setInterval(function () {
-                currentTime--; //每执行一次让倒计时秒数减一
-                that.setData({
-                  text: currentTime + 's', //按钮文字变成倒计时对应秒数
-                })
-                //如果当秒数小于等于0时 停止计时器 且按钮文字变成重新发送 且按钮变成可用状态 倒计时的秒数也要恢复成默认秒数 即让获取验证码的按钮恢复到初始化状态只改变按钮文字
-                if (currentTime <= 0) {
-                  clearInterval(interval)
-                  that.setData({
-                    currentTime: 61,
-                    disabled: false,
-                    color: '#33FF99'
-                  })
-                }
-              }, 100);
-            }
-          })
-        };
-        //判断 当提示错误信息文字不为空 即手机号输入有问题时提示用户错误信息 并且提示完之后一定要让按钮为可用状态 因为点击按钮时设置了只要点击了按钮就让按钮禁用的情况
-        if (warn != null) {
-          wx.showModal({
-            title: '提示',
-            content: warn
-          })
-          that.setData({
-            disabled: false,
-            color: '#33FF99'
-          })
-          return;
-        }
+        that.setData({
+          disabled: false, //重启点击
+          color: '#80a1a3',
+        })
       }
-    })
-  },
+    }
+  })
+  return true
+},
    //提交修改
    submit(){
+     var that=this
+     that.setData({
+        user:{
+            phone: this.data.phone,
+            nickName: wx.getStorageSync('userInfo').nickName,
+            avatarUrl: wx.getStorageSync('userInfo').avatarUrl,
+        }
+     })
+    var app=getApp()
+    var host =app.globalData.host
     if(this.checkPhone()){
       //校验通过之后校验车牌号
       if(this.isCarLicense(this.data.plate)){
         wx.request({
-          url: '',
+          url:host+"/user/saveUser" ,
+          method:"POST",
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
           data:{
-            phone:this.data.phone,
-            verifycode:this.data.VerificationCode,
-            plate:this.data.plate
+            user:that.data.user,
+            verifycode:that.data.VerificationCode,
+            plate:that.data.plate
           },
           success:function(res){
-            wx.showToast({
-              title: '添加/修改成功',
-              icon:"success",
-              duration:1500
-            })
-            wx.switchTab({
-              url: '../user/user',
-            })
+            console.log(res.data)
+            if(res.data.code==201){
+              wx.showToast({
+                title: '绑定失败，请重新进行绑定',
+                icon:"none",
+                duration:2000,
+                success(){
+                  that.setData({
+                    disabled: false, //重启点击
+                    color: '#80a1a3',
+                  })
+                }
+              })
+            }
+            else if(res.code){
+              wx.showToast({
+                title: '添加成功',
+                icon:"success",
+                duration:3000,
+                success(){
+                 wx.switchTab({
+                    url: '../user/user',
+                  })
+                }
+              })
+            }
+
           }
         })
       }

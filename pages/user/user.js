@@ -7,9 +7,8 @@ Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    money:100,
     phone:"",
-    isowner:false,
+    identify:0,
     bguser:"../../static/bguser.png",
     userInfo:"",
     hasUserInfo:false,
@@ -38,6 +37,9 @@ Page({
     
   },
   getUserProfile(e) {
+    var that=this
+    var appInstance = getApp()
+    var host = appInstance.globalData.host
     // 推荐使用 wx.getUserProfile 获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
     // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -48,8 +50,29 @@ Page({
           hasUserInfo: true,
         })
         wx.setStorageSync('userInfo', res.userInfo)
+            //登录之后获取该微信号所绑定的用户的信息
+        wx.request({
+          url: host+"/user/getMessage",
+          method:'GET',
+          data:{
+            nickName: res.userInfo.nickName,
+            avatarUrl: res.userInfo.avatarUrl
+          },
+          header: {
+            "Content-Type": "application/json"
+          },
+          success:function(res){
+            //改变全局变量的值
+            appInstance.globalData.phone=res.data.data.user.phone
+            that.setData({
+              identify:res.data.data.user.identify
+            })
+          }
+        })
       }
     })
+
+
   },
 
   /**
@@ -62,7 +85,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-        // 获取本地存储中的用户信息
+
   },
 
   /**
